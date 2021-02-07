@@ -1,26 +1,44 @@
+
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <todo-list :todos="todos"></todo-list>
+  <create-todo @createToDo="addTodo"></create-todo>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CreateTodo from "./Components/CreateTodo/CreateTodo.vue";
+
+/**
+ *  Component Defination
+ */
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  /**
+   * Register local components
+   */
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: { CreateTodo },
+  data() {
+    return {
+      todos: [
+        {
+          id: 1,
+          title: "Learn Vue JS",
+        },
+        {
+          id: 2,
+          title: "Learn Vue JS routing",
+        },
+        {
+          id: 3,
+          title: "Learn Vue JS State Management ",
+        },
+      ],
+    };
+  },
+  methods: {
+    addTodo: function (todo) {
+      this.todos = [...this.todos, { id: this.todos.length + 1, title: todo }];
+    },
+  },
+};
+</script>
